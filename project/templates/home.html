@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="container">
+{% if user %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.extrafield.address}}</td>
+      <td><ion-icon style="cursor: pointer;" name="pencil-outline"></ion-icon></td>
+      <td><ion-icon style="cursor: pointer;" name="trash-sharp"></ion-icon></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<large class="mt-4" style="display: flex; justify-content: center; align-items: center;">
+  <em >No User Available.</em>
+</large> 
+{% endif %}
+</div>
+{% endblock %}

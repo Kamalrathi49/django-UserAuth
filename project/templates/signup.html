@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block title %} Create Account {% endblock %} {% block content %}
+<div class="" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-c">
+        <h5 class="text-center">Create Account</h5>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'myapp:signup' %}" method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <button class="btn btn-primary" type="submit">Create Account</button>
+        </form>
+        <hr />
+        <p class="text-center">
+          Already have an account?
+          <btn
+            style="cursor: pointer"
+            type="button"
+            class="text-primary text-decoration-none">
+            <a href="{% url 'myapp:login' %}">Login</a></btn >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
