@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block title %} Home {% endblock %}
 {% block content %}
-<div class="container">
 {% if user %}
-<table class="table">
+<table id="table" class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -21,8 +20,13 @@
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{user.extrafield.address}}</td>
-      <td><ion-icon style="cursor: pointer;" name="pencil-outline"></ion-icon></td>
-      <td><ion-icon style="cursor: pointer;" name="trash-sharp"></ion-icon></td>
+      {% if user == request.user  %}
+      <td> <a href=""> <ion-icon style="cursor: pointer; margin-left: 7px;" name="create-outline"></ion-icon></a></td>
+      <td> <a href="{% url 'myapp:delete-user' user.id %}"><ion-icon style="cursor: pointer; margin-left: 7px;" name="trash-sharp"></ion-icon></a></td>
+      {% else %}
+      <td> <button disabled style="cursor: text; border: none; background: none;" > <ion-icon  name="create-outline"></ion-icon> </button> </td>
+      <td> <button disabled style="cursor: text; border: none; background: none;"> <ion-icon  name="trash-sharp"></ion-icon></button></td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
@@ -32,5 +36,4 @@
   <em >No User Available.</em>
 </large> 
 {% endif %}
-</div>
 {% endblock %}

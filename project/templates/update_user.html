@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block title %} Create Account {% endblock %} {% block content %}
+<div class="" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-c">
+        <h5 class="text-center">Update User</h5>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'myapp:signup' %}" method="post">
+          {% csrf_token %} {{ form.username }}
+          {{ form.email }}
+          {{ form.address }}
+          <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
