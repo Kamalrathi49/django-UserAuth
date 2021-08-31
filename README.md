@@ -1,7 +1,6 @@
 # django-UserAuth
-### Demo - https://django-restfullapi.herokuapp.com/
-### Api - https://django-restfullapi.herokuapp.com/?format=json
-#### Code - https://github.com/Kamalrathi49/django-RESTfullapi
+### Demo - https://django-userauth.herokuapp.com/
+#### Code - https://github.com/Kamalrathi49/django-UserAuth
 #### Detail Brochure
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
