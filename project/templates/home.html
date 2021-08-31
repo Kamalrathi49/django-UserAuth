@@ -19,9 +19,9 @@
       <th scope="row">{{forloop.counter}}</th>
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
-      <td>{{user.extrafield.address}}</td>
+      <td>{{user.address}}</td>
       {% if user == request.user  %}
-      <td> <a href=""> <ion-icon style="cursor: pointer; margin-left: 7px;" name="create-outline"></ion-icon></a></td>
+      <td> <a href="{% url 'myapp:update-user' user.id %}"> <ion-icon style="cursor: pointer; margin-left: 7px;" name="create-outline"></ion-icon></a></td>
       <td> <a href="{% url 'myapp:delete-user' user.id %}"><ion-icon style="cursor: pointer; margin-left: 7px;" name="trash-sharp"></ion-icon></a></td>
       {% else %}
       <td> <button disabled style="cursor: text; border: none; background: none;" > <ion-icon  name="create-outline"></ion-icon> </button> </td>

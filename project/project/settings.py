@@ -143,3 +143,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+AUTH_USER_MODEL = 'myapp.CustomUser'
+AUTHENTICATION_BACKENDS = ['myapp.backends.EmailBackend']
+LOGIN_REDIRECT_URL = '/home'
