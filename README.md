@@ -28,11 +28,11 @@
 - modal impliments
 
 ## Screenshots
-- API objects ![screenshot 1](https://github.com/Kamalrathi49/django-RESTfullapi/blob/master/screenshots/Screenshot%20(76).png?raw=true)
+- API objects ![screenshot 1](https://github.com/Kamalrathi49/django-UserAuth/blob/master/screenshots/Screenshot%20(76).png?raw=true)
  
-- Api CRUD operation ![screenshot 1](https://github.com/Kamalrathi49/django-RESTfullapi/blob/master/screenshots/Screenshot%20(77).png?raw=true)
+- Api CRUD operation ![screenshot 1](https://github.com/Kamalrathi49/django-django-UserAuth/blob/master/screenshots/Screenshot%20(77).png?raw=true)
 
-- API ![screenshot 1](https://github.com/Kamalrathi49/django-RESTfullapi/blob/master/screenshots/Screenshot%20(78).png?raw=true)
+- API ![screenshot 1](https://github.com/Kamalrathi49/django-django-UserAuth/blob/master/screenshots/Screenshot%20(78).png?raw=true)
 
 
 
