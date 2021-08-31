@@ -6,7 +6,11 @@
         </ul>
       </div>
       {% if user.is_authenticated %}
-       <btn class="btn  btn-sm px-3 text-decoration-none text-dark" > <a class="text-decoration-none text-dark" href="{% url 'myapp:logout' %}">Logout</a></btn>
+      <div>
+
+        <btn id="api" class="btn  btn-sm text-decoration-none text-dark" > <a class="text-decoration-none text-dark" href="/api/token">API</a></btn>
+        <btn class="btn  btn-sm px-3 text-decoration-none text-dark" > <a class="text-decoration-none text-dark" href="{% url 'myapp:logout' %}">Logout</a></btn>
+      </div>
        {% endif %}
     </div>
   </nav>
