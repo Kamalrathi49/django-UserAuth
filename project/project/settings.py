@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-qm7-wj#k7kb4fh!gb=u9(^k!-+21l)a&@_pp_qemte#)2h_1w#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','django-UserAuth.herokuapp.com']
 
 
 # Application definition
@@ -43,9 +43,14 @@ INSTALLED_APPS = [
 
     # created app
     'myapp',
+
+    # third party installed apps
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,6 +135,8 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -147,3 +154,14 @@ MESSAGE_TAGS = {
 AUTH_USER_MODEL = 'myapp.CustomUser'
 AUTHENTICATION_BACKENDS = ['myapp.backends.EmailBackend']
 LOGIN_REDIRECT_URL = '/home'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
+    'DEAFULT_AUTHENTICATION_CLASSES' : ('rest_framework_simplejwt.authentication.JWTAuthentication',) 
+}
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
