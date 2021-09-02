@@ -7,9 +7,10 @@ from django.contrib import messages
 from django.contrib.auth import views as auth_views
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required
 def home(request):
     users = CustomUser.objects.all()
     ctx = {'users':users}
@@ -30,7 +31,7 @@ def signup(request):
             user = form.save()
             auth_login(request, user)
             messages.success(request, f'Account created Successfully!')
-            return redirect('/home')
+            return redirect('/')
         else:
             messages.error(request, f'Something went wrong! please try again.')
             return redirect('/signup')
@@ -56,7 +57,7 @@ def updateuser(request, customuser_id):
             user = form.save()
             auth_login(request, user)
             messages.success(request, f"Updated Successfully!")
-            return redirect('/home')
+            return redirect('/')
         else:
             messages.error(request, "something went wrong, please try again!")
             return redirect(f'/update_user/{customuser_id}')
