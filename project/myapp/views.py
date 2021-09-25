@@ -1,13 +1,14 @@
-from django.contrib.messages.api import error
-from django.shortcuts import redirect, render, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from .forms import *
-from .models import *
+from myapp import *
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.contrib.auth import views as auth_views
-from django.views import generic
-from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views import generic
+from django.contrib.messages.views import SuccessMessageMixin
+
 # Create your views here.
 
 @login_required
@@ -16,60 +17,28 @@ def home(request):
     ctx = {'users':users}
     return render(request, 'home.html', ctx)
 
-
-class LoginView(auth_views.LoginView):
+class Login( SuccessMessageMixin, auth_views.LoginView):
     form_class = LoginForm
     template_name = 'login.html'
+    success_message = "Logged In successfully"
 
-
-
+class SignUp( SuccessMessageMixin, generic.CreateView):
+    form_class = RegisterForm
+    success_url = reverse_lazy('myapp:home')
+    template_name = 'signup.html'
+    success_message = "Your Account was created successfully, Please now login to access Home page"
     
-def signup(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            messages.success(request, f'Account created Successfully!')
-            return redirect('/')
-        else:
-            messages.error(request, f'Something went wrong! please try again.')
-            return redirect('/signup')
-    else: 
-        form = RegisterForm()
-        ctx = {'form': form}
-        return render(request, 'signup.html', ctx)
 
-class login(auth_views.LoginView):
-    form_class = LoginForm
-    template_name = 'login.html'
 
 def log_out(request):
     logout(request)
     messages.success(request, f"Logged out Successfully!")
     return redirect('/')
 
-def updateuser(request, customuser_id):
-    if request.method == 'POST':
-        inst = CustomUser.objects.get(id = customuser_id)
-        form = RegisterForm(request.POST or None, instance = inst)
-        if form.is_valid():
-            user = form.save()
-            auth_login(request, user)
-            messages.success(request, f"Updated Successfully!")
-            return redirect('/')
-        else:
-            messages.error(request, "something went wrong, please try again!")
-            return redirect(f'/update_user/{customuser_id}')
-    
-    else:
-        inst = CustomUser.objects.get(id = customuser_id)
-        form = RegisterForm(request.POST or None, instance = inst)
-        ctx = {'form': form}
-        return render(request, 'update_user.html', ctx)
 
 def deleteuser(request, customuser_id):
     user = CustomUser.objects.get(id = customuser_id)
     user.delete()
-    messages.success(request, f"User deleted Successfully!")
+    messages.success(request, f"Account deleted Successfully!")
     return redirect('/')
+

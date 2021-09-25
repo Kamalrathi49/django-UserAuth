@@ -1,10 +1,8 @@
-from django.contrib.auth.models import User
 from django import forms
-from django.forms.widgets import EmailInput, PasswordInput, TextInput
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
-
-
+from django.forms.widgets import DateInput
+from .models import *
 
 
 class RegisterForm(UserCreationForm):
@@ -16,8 +14,8 @@ class RegisterForm(UserCreationForm):
      'class': 'form-control', 'placeholder': 'Email Address'
     }))
 
-    address = forms.CharField(widget=forms.TextInput(attrs={
-     'class': 'form-control', 'placeholder': 'Address'
+    phone_number = forms.CharField(widget=forms.NumberInput(attrs={
+     'class': 'form-control', 'placeholder': 'Phone No.'
     }))
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
@@ -28,12 +26,15 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", 'address', 'password1', 'password2' )
+        fields = ("username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2' )
+
+        widgets = {
+        'date_of_birth': DateInput(attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Date Of Birth'})
+        }
     
     def __init__(self, *args, **kwargs):
-        # Call to ModelForm constructor
         super(RegisterForm, self).__init__(*args, **kwargs)
-        for fieldname in ['username', 'email', 'address', 'password1', 'password2']:
+        for fieldname in ["username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
 
@@ -44,3 +45,5 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control', 'placeholder': 'Password'
     }))
+
+    

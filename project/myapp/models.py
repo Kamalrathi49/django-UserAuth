@@ -6,12 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
-    address = models.TextField(_('address'))
-
-# class extrafield(models.Model):
-#     address = models.TextField(max_length=100)
-#     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='extrafield')
-
-#     def __str__(self):
-#         return self.user.username
+    date_of_birth = models.DateField(_('date of birth'))
+    phone_number = models.CharField(_('phone number'), max_length=12)
 
