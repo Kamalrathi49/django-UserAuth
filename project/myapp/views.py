@@ -29,7 +29,6 @@ class SignUp( SuccessMessageMixin, generic.CreateView):
     success_message = "Your Account was created successfully, Please now login to access Home page"
     
 
-
 def log_out(request):
     logout(request)
     messages.success(request, f"Logged out Successfully!")

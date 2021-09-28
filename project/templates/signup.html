@@ -6,7 +6,7 @@
         <h5 class="text-center">Create Account</h5>
       </div>
       <div class="modal-body">
-        <form action="{% url 'myapp:signup' %}" method="post">
+        <form action="{% url 'myapp:signup' %}" enctype="multipart/form-data" method="post">
           {% csrf_token %} {{ form.as_p }}
           <div id="passwordHelpBlock" class="form-text mb-3">
            <strong class="text-danger text-decoration-underline">Note</strong>:- Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces or emoji.

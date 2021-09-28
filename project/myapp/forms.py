@@ -6,6 +6,9 @@ from .models import *
 
 
 class RegisterForm(UserCreationForm):
+
+    image = forms.ImageField(label=(u'Profile Picture'))
+
     username = forms.CharField(widget=forms.TextInput(attrs={
      'class': 'form-control', 'placeholder': 'Username'
     }))
@@ -26,7 +29,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2' )
+        fields = ("image", "username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2' )
 
         widgets = {
         'date_of_birth': DateInput(attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Date Of Birth'})
@@ -34,7 +37,7 @@ class RegisterForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
-        for fieldname in ["username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2']:
+        for fieldname in ["image", "username", "email", 'date_of_birth', 'phone_number', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
 

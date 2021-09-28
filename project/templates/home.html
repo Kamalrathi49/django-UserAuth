@@ -9,6 +9,7 @@
       <thead> 
         <tr>
           <th>#</th>
+          <th>Image</th>
           <th>Username</th>
           <th>Email</th>
           <th>Phone No.</th>
@@ -18,8 +19,16 @@
       </thead> 
       <tbody> 
           {% for user in users %}
-            <tr {% if user == request.user  %} style="background-color: whitesmoke;" {% endif %} > 
+          
+            <tr {% if user.is_superuser %} style="display: none;" {% endif %} {% if user == request.user  %} style="background-color: whitesmoke;" {% endif %} > 
               <th scope="row">{{forloop.counter}}</th> 
+              <th>
+                {% if user.image %}
+                <img style="border-radius: 50%;" src="{{ user.image.url }}" alt="image" height="40px" width="40px">
+                {% else %}
+                <img style="border-radius: 50%;" src="https://clients.cylindo.com/viewer/3.x/v3.0/documentation/img/not_found.gif" height="40px" width="40px alt="" >
+                {% endif %}
+              </th> 
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
               <td>{{user.phone_number}}</td>
