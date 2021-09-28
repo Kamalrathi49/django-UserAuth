@@ -17,6 +17,13 @@ def home(request):
     ctx = {'users':users}
     return render(request, 'home.html', ctx)
 
+
+@login_required
+def my_profile(request, customuser_id):
+    user = CustomUser.objects.filter(id = customuser_id)
+    ctx = {'user':user}
+    return render(request, 'my_profile.html', ctx)
+
 class Login( SuccessMessageMixin, auth_views.LoginView):
     form_class = LoginForm
     template_name = 'login.html'
@@ -41,3 +48,9 @@ def deleteuser(request, customuser_id):
     messages.success(request, f"Account deleted Successfully!")
     return redirect('/')
 
+class UpdateProfile(UpdateView):
+    model = CustomUser
+    fields = ['image', 'username', 'email', 'date_of_birth', 'phone_number',] 
+    template_name = 'user_update.html'
+    slug_field = 'id'
+    slug_url_kwarg = 'customuser_id'

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} My Profile {% endblock %}
+{% block content %}
+
+{% for info in user %}
+<div class="card" style="width: 18rem;">
+    <img  {% if info.image %} src="{{ info.image.url }}" {% else %} src="https://clients.cylindo.com/viewer/3.x/v3.0/documentation/img/not_found.gif" {% endif %} class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">@{{info.username}}</h5>
+      <p class="card-text">{{info.email}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><ion-icon name="call-outline"></ion-icon> {{info.phone_number}}</li>
+      <li class="list-group-item"><ion-icon name="calendar-outline"></ion-icon>  {{info.date_of_birth}}</li>
+    </ul>
+    <div class="card-body d-flex justify-content-end">
+      <a href="{% url 'myapp:update-user' request.user.id %}" class="card-link text-decoration-none ">Edit</a>
+      <a href="{% url 'myapp:delete-user' request.user.id %}" class="card-link text-danger text-decoration-none">Delete</a>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}

@@ -7,6 +7,7 @@
       </div>
       {% if user.is_authenticated %}
       <div>
+        <btn class="btn  btn-sm text-decoration-none text-dark" > <a class="text-decoration-none text-dark" href="{% url 'myapp:my-profile' request.user.id %}">My Profile</a></btn>
         <btn class="btn  btn-sm px-3 text-decoration-none text-dark" > <a class="text-decoration-none text-dark" href="{% url 'myapp:logout' %}">Logout</a></btn>
       </div>
        {% endif %}
