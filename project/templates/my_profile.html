@@ -2,21 +2,97 @@
 {% block title %} My Profile {% endblock %}
 {% block content %}
 
+<!-- Modal -->
+<div class="modal fade" id="delete-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure, You want to delete your Account ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a class="text-decoration-none" href="{% url 'myapp:delete-user' request.user.id %}">
+          <button type="button" class="btn btn-danger">Delete</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% for info in user %}
-<div class="card" style="width: 18rem;">
-    <img  {% if info.image %} src="{{ info.image.url }}" {% else %} src="https://clients.cylindo.com/viewer/3.x/v3.0/documentation/img/not_found.gif" {% endif %} class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">@{{info.username}}</h5>
-      <p class="card-text">{{info.email}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><ion-icon name="call-outline"></ion-icon> {{info.phone_number}}</li>
-      <li class="list-group-item"><ion-icon name="calendar-outline"></ion-icon>  {{info.date_of_birth}}</li>
-    </ul>
-    <div class="card-body d-flex justify-content-end">
-      <a href="{% url 'myapp:update-user' request.user.id %}" class="card-link text-decoration-none ">Edit</a>
-      <a href="{% url 'myapp:delete-user' request.user.id %}" class="card-link text-danger text-decoration-none">Delete</a>
-    </div>
+<div class="container">
+  <div class="main-body">
+  
+        <div class="row gutters-sm">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img  {% if info.image %} src="{{ info.image.url }}" {% else %} src="https://bootdey.com/img/Content/avatar/avatar7.png" {% endif %} alt="Admin" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4>@{{info.username}}</h4>
+                    <p class="text-secondary mb-1">{{info.profession}}</p>
+                    <p class="text-muted font-size-sm">{{info.address}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{info.full_name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{info.email}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{info.phone_number}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Address</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{info.address}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <a class="btn btn-info" href="{% url 'myapp:update-user' request.user.id %}">Edit</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user"  href="">Delete Account</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 {% endfor %}
 

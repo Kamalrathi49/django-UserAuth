@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block title %} Create Account {% endblock %} {% block content %}
+<div class="" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-c">
+        <h5 class="text-center">Edit Profile</h5>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'myapp:update-user' request.user.id %}" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Profile Picture</label>
+              {{form.image}}
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Full Name</label>
+              {{form.full_name}}
+            </div> 
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Email</label>
+              {{form.email}}
+            </div> 
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Address</label>
+              {{form.address}}
+            </div> 
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Profession</label>
+              {{form.profession}}
+            </div> 
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Phone</label>
+              {{form.phone_number}}
+            </div> 
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

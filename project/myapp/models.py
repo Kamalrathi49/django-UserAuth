@@ -6,16 +6,11 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class CustomUser(AbstractUser):
-    image = models.ImageField(blank=True, null=True, upload_to="images/")
+    full_name = models.CharField(_('full name'), max_length=150)
+    profession = models.CharField(_('profession'), max_length=150)
+    address = models.CharField(_('address'), max_length=150)
+    image = models.ImageField(_('image'), blank=True, null=True, upload_to="images/")
     email = models.EmailField(_('email address'), unique=True)
-    date_of_birth = models.DateField(_('date of birth'))
     phone_number = models.CharField(_('phone number'), max_length=12)
 
 
-class UpdateProfile(UpdateView):
-    model = CustomUser
-    fields = ['first_name', 'last_name', 'image', 'url', 'biography', '...'] # Keep listing whatever fields 
-    # the combined UserProfile and User exposes.
-    template_name = 'user_update.html'
-    slug_field = 'username'
-    slug_url_kwarg = 'slug'

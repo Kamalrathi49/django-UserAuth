@@ -24,12 +24,12 @@ def my_profile(request, customuser_id):
     ctx = {'user':user}
     return render(request, 'my_profile.html', ctx)
 
-class Login( SuccessMessageMixin, auth_views.LoginView):
+class Login(SuccessMessageMixin, auth_views.LoginView):
     form_class = LoginForm
     template_name = 'login.html'
     success_message = "Logged In successfully"
 
-class SignUp( SuccessMessageMixin, generic.CreateView):
+class SignUp(SuccessMessageMixin, generic.CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy('myapp:home')
     template_name = 'signup.html'
@@ -48,9 +48,11 @@ def deleteuser(request, customuser_id):
     messages.success(request, f"Account deleted Successfully!")
     return redirect('/')
 
-class UpdateProfile(UpdateView):
+class UpdateProfile(SuccessMessageMixin ,UpdateView):
     model = CustomUser
-    fields = ['image', 'username', 'email', 'date_of_birth', 'phone_number',] 
+    fields = ['image', 'full_name', 'email', "address", "profession", 'phone_number',] 
     template_name = 'user_update.html'
     slug_field = 'id'
     slug_url_kwarg = 'customuser_id'
+    success_url = reverse_lazy('myapp:home')
+    success_message = "Your profile is updated successfully!"

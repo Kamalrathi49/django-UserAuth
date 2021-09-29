@@ -12,32 +12,28 @@
           <th></th>
           <th>Username</th>
           <th>Email</th>
+          <th>Profession</th>
           <th>Phone No.</th>
-          <th>D.O.B</th>
-          <th>Delete</th>
+          <th>Address</th>
         </tr> 
       </thead> 
       <tbody> 
           {% for user in users %}
           
             <tr {% if user.is_superuser %} style="display: none;" {% endif %} {% if user == request.user  %} style="background-color: whitesmoke;" {% endif %} > 
-              <th scope="row">{{forloop.counter}}</th> 
+              <th scope="row">{{forloop.counter0}}</th> 
               <th>
                 {% if user.image %}
                 <img style="border-radius: 50%;" src="{{ user.image.url }}" alt="image" height="40px" width="40px">
                 {% else %}
-                <img style="border-radius: 50%;" src="https://clients.cylindo.com/viewer/3.x/v3.0/documentation/img/not_found.gif" height="40px" width="40px alt="" >
+                <img style="border-radius: 50%;" src="https://bootdey.com/img/Content/avatar/avatar7.png" height="40px" width="40px alt="" >
                 {% endif %}
               </th> 
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
+              <td>{{user.profession}}</td>
               <td>{{user.phone_number}}</td>
-              <td>{{user.date_of_birth}}</td>
-              {% if user == request.user  %}
-              <td> <a href="{% url 'myapp:delete-user' user.id %}"><ion-icon style="cursor: pointer; margin-left: 7px; " name="trash-sharp"></ion-icon></a></td>
-              {% else %}
-              <td><button disabled style="cursor: text; border: none; background: none;"> <ion-icon  name="trash-sharp"></ion-icon></button></td>
-              {% endif %}
+              <td>{{user.address}}</td>
             </tr> 
           {% endfor %}
           </tbody> 
